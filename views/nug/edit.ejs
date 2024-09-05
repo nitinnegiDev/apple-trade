@@ -1,0 +1,117 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container">
+    <h1><%= orchard.owner.toUpperCase() %></h1>
+
+    <div class="col">
+        <div class="row m-0">
+            <%- include("../partials/showPersonalInfo") %>
+            <div class="col justify-center">
+                <button class="btn btn-sm btn-green">
+                    <a href="/records/<%= orchard._id %>/nugs/personInfo">Edit Person Info</a>
+                </button>
+            </div>
+        </div>
+        <div class="col container">
+            <span>
+                <i><b>Nugs</b></i>
+            </span>
+
+            <% for (let index = 0; index<orchard.lot.length; index++) { %>
+
+            <span class="row box">
+                <% if(editIndex === index) { %>
+                <form id="dataForm" class="row" action="/records/<%= orchard._id %>/nugs/<%= editIndex %>?_method=PUT"
+                    method="POST">
+
+
+                    <table class="text-center" width="100%" height="50px">
+                        <thead>
+                            <tr>
+                                <th><label for="variety">Variety</label></th>
+                                <th><label for="marka">Marka</label></th>
+                                <% Object.keys(orchard.lot[0].nugsInfo).forEach((boxType)=> { %>
+                                <th><label for="<%= boxType %>"><%= boxType %></label></th>
+                                <% }) %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td width="10%">
+                                    <input class="text-center" type="text" size="5%" name="variety" id="variety"
+                                        value="<%= orchard.lot[index].variety ? orchard.lot[index].variety.toUpperCase() : "" %>">
+                                </td>
+                                <td width="10%">
+                                    <input class="text-center" type="text" size="5%" name="marka" id="marka"
+                                        value="<%= orchard.lot[index].marka.toUpperCase() %>" required>
+                                </td>
+                                <% Object.keys(orchard.lot[editIndex].nugsInfo).forEach((boxType) => { %>
+                                <td width="10%">
+                                    <input class="text-center" type="number" min="1" max="1000" name="nugsInfo"
+                                        id="<%= boxType %>" value="<%= orchard.lot[editIndex].nugsInfo[boxType] %>">
+                                </td>
+                                <% }) %>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="col container">
+                        <button class="btn btn-sm btn-green">Save</button>
+                    </div>
+
+                </form>
+
+                <% } else { %>
+
+
+                <div class="col col-2 justify-center">
+                    <b><%= orchard.lot[index].marka.toUpperCase() %>: </b>
+                </div>
+                <div class="row container flex-start">
+                    <table class="text-center" width="100%" height="50px">
+                        <thead>
+                            <tr>
+                                <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                <th><b><%= boxType %></b></th>
+                                <% } %>
+                                <% }) %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                <td width="10%"><%= orchard.lot[index].nugsInfo[boxType] %></td>
+                                <% } %>
+                                <% }) %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-2 row flex-end container">
+                    <form action="/records/<%= orchard._id %>/nugs/<%= index %>">
+                        <button class="btn btn-sm btn-green">Edit Nug</button>
+                    </form>
+                    <form action="/records/<%= orchard._id %>/nugs/<%= index %>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-red">Remove</button>
+                    </form>
+                </div>
+
+
+                <% } %>
+            </span>
+            <% } %>
+        </div>
+        <hr>
+        <div class="row">
+            <button class="btn btn-lg btn-yellow"><a href="/records/<%= orchard._id %>/nugs/new">Add Nug</a></button>
+            <form action="/records/<%= orchard._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-lg btn-red">Delete Record</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="/javascripts/eventFilterNug.js"></script>

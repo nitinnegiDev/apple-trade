@@ -1,0 +1,76 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container">
+    <h1>Add new record</h1>
+    <form class="m-5" id="dataForm" action="/records" method="POST">
+        <div class="row justify-center">
+            <div class="col">
+                <div class="row flex-start">
+                    <label for="owner"><b>Owner:</b></label>
+                    <input type="text" id="owner" name="orchard[owner]" placeholder="* full name" required>
+                </div>
+                <div class="row flex-start">
+                    <label for="age"><b>Age:</b></label>
+                    <input type="number" id="age" name="orchard[age]" min="5" max="120" placeholder=" age">
+                </div>
+
+                <div class="row flex-start">
+                    <label for="contact"><b>Contact:</b></label>
+                    <input type="number" id="contact" name="orchard[contact]" placeholder="* phone no." required>
+                </div>
+
+                <div class="row flex-start">
+                    <div class="row m-0">
+                        <label class="col justify-center m-0" for="address"><b>Address:</b></label>
+                        <textarea type="text" id="address" name="orchard[address]" rows="3" cols="40"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-center">
+            <div class="container">
+                <span>
+                    <i><b>Nugs</b></i>
+                </span>
+                <span class="row box">
+                    <div class="row m-5 justify-center">
+                        <table class="m-5" width="100%" height="50px">
+                            <thead>
+                                <tr>
+                                    <th><label for="variety">variety</label></th>
+                                    <th><label for="marka">Marka</label></th>
+                                    <% ["xl", "l", "m", "s", "xs", "xxs", "6l", "7l"].forEach((boxType)=> { %>
+                                    <th><label for="<%= boxType %>"><%= boxType %></label></th>
+                                    <% }) %>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="10%">
+                                        <input class="text-center col container" type="text" size="5%" name="variety"
+                                            id="variety" required>
+                                    </td>
+                                    <td width="10%" class="justify-center">
+                                        <input class="text-center col container" type="text" size="5%" name="marka"
+                                            id="marka" required>
+                                    </td>
+                                    <% ["xl", "l", "m", "s", "xs", "xxs", "6l", "7l"].forEach((boxType)=> { %>
+                                    <td width="10%">
+                                        <input class="text-center" type="number" min="1" max="1000" name="nugsInfo"
+                                            id="<%= boxType %>">
+                                    </td>
+                                    <% }) %>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <section class="container">
+            <button class="btn btn-green" type="submit">Submit</button>
+        </section>
+    </form>
+</div>
+
+<script src="/javascripts/eventFilterNug.js"></script>

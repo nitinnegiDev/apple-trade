@@ -1,0 +1,52 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="row">
+    <div class="col">
+        <h1><%= orchards.isSearchedOwner ? `showing results for ${orchards[0].owner.toUpperCase()}...`: "All Records"%>
+        </h1>
+
+        <% for(let orchard of orchards) { %>
+        <div class="row flex-start ">
+            <div class="col">
+                <img class="profilePic" src="/images/defaultImg.png" title="profile picture">
+            </div>
+            <div class="col justify-center">
+                <h3><a href="/records/<%= orchard._id %>"><%= orchard.owner.toUpperCase() %></a></h3>
+                <div>Total Lots:
+                    <span class="blue"><%= orchard.lot.length %></span>
+                </div>
+
+                <% let billingCount = 0; %>
+                <% orchard.lot.forEach((lot) => { %>
+                <% if(lot.billingOn) { %>
+                <% billingCount += 1 %>
+                <% } %>
+                <% }) %>
+                <div>Billing done for
+                    <span class="blue"><%= billingCount %></span> lots
+                </div>
+                <i><%= orchard.address %></i>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <div class="col infoSection">
+
+        <h2>Payments Info</h2>
+        <section>
+            <p>
+                <b>Pending payment: </b>
+                <span class="blue"><%= aadti.pendingPayment ? aadti.pendingPayment : 0 %> rs</span>
+            </p>
+            <p>
+                <b>Total bills generated: </b>
+                <span class="blue"><%= aadti.billsGenerated ? aadti.billsGenerated : 0 %></span>
+            </p>
+            <p>
+                <b>Total bills settled: </b>
+                <span class="blue"><%= aadti.billsSettled ? aadti.billsSettled : 0 %></span>
+            </p>
+        </section>
+
+    </div>
+</div>

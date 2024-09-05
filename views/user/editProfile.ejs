@@ -1,0 +1,38 @@
+<% layout("layouts/boilerplate") %>
+<div class="container">
+
+    <h1>@<%= user.username %></h1>
+    <form class="container" action="/user/profile/edit" method="POST">
+        <div class="row justify-center">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><b>Name</b></td>
+                        <td><input type="text" name="name" value="<%= user.name %>" required></td>
+                    </tr>
+                    <tr>
+                        <td><b>Age</b></td>
+                        <td><input type="number" name="age" min="5" max="120" value="<%= user.age %>"></td>
+                    </tr>
+                    <tr>
+                        <td><b>Phone</b></td>
+                        <td><input type="number" name="phone" value="<%= user.phone %>" required></td>
+                    </tr>
+                    <tr>
+                        <td><b>Email</b></td>
+                        <td><input type="email" name="email" value="<%= user.email %>" required></td>
+                    </tr>
+                    <tr>
+                        <td><b>Address</b></td>
+                        <td><input type="text" name="address" value="<%= user.address %>" required>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <button class="btn"><a href="/user/profile">Cancel</a></button>
+            <button class="btn btn-lg btn-yellow">Save</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,211 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #8DAA91;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px;
+    background: #747E71;
+    border-bottom: 2px solid darkgray;
+    position: sticky;
+    top: 0;
+}
+
+footer {
+    background: #747E71;
+    padding: 10px;
+    border-top: 2px solid darkgray;
+    margin-top: auto;
+}
+
+.brandname {
+    text-shadow: red 0 0 20px;
+}
+
+
+::placeholder {
+    font-style: italic;
+}
+
+.profilePic {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 5px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.col-4 {
+    width: 66%;
+    margin: 5px;
+}
+
+.col-3 {
+    width: 50%;
+    margin: 5px;
+}
+
+.col-2 {
+    width: 33%;
+}
+
+.m-5 {
+    margin: 5px;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.btn {
+    padding: 2px;
+    border-radius: 5px;
+    min-width: 50px;
+    max-width: 200px;
+    margin: 0 2px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn-sm {
+    padding: 4px;
+    min-width: 70px;
+}
+
+.btn-lg {
+    padding: 6px;
+}
+
+.btn-green {
+    background: green;
+    color: white;
+}
+
+.btn-red {
+    background: red;
+    color: white;
+}
+
+.btn-yellow {
+    background: yellow;
+    color: black;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.flex-start {
+    justify-content: flex-start;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.box {
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.br-10 {
+    border-radius: 10px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+table,
+th,
+td {
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.infoSection {
+    color: black;
+    background: white;
+    padding-left: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 10px;
+    width: 30%;
+    height: fit-content;
+    position: sticky;
+    top: 15%
+}
+
+.bill-table {
+    min-width: max-content;
+}
+
+.display-none {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+}

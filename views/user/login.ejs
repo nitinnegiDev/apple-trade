@@ -1,0 +1,23 @@
+<% layout("layouts/boilerplate") %>
+<div class="center">
+    <h1>Profile Login</h1>
+    <form action="/user/login" method="POST">
+        <div class="row">
+            <label for="username">Username: </label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="row">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <% if(error.length && !activeUser) { %>
+        <div class="container">
+            <i><a href="/user/resetPassword">forgot password?</a></i>
+        </div>
+        <% } %>
+        <br>
+        <div class="container">
+            <button class="btn btn-green">Login</button>
+        </div>
+    </form>
+</div>

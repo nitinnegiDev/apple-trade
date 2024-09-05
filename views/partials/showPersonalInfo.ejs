@@ -1,0 +1,11 @@
+<div>
+    <% if(orchard.age) { %>
+    <div><b>Age: </b><%= orchard.age %><% orchard.age ? "years" : '' %></div>
+    <% } %>
+    <% if(orchard.contact) { %>
+    <div><b>Contact: </b><%= orchard.contact %></div>
+    <% } %>
+    <% if(orchard.address) { %>
+    <div><b>Address: </b><%= orchard.address %></div>
+    <% } %>
+</div>

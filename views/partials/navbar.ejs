@@ -1,0 +1,47 @@
+<header id="navbar" class="navbar">
+    <div class="row align-center">
+        <nav class="col-2">
+            <b class="brandname">Apple-Trade</b>
+            <% if(activeUser) { %>
+
+            <% if(path !== "/user/profile") { %>
+            <button class="btn btn-sm"><a href="/user/profile">Profile</a></button>
+            <% } %>
+
+            <% if(activeUser) { %>
+
+            <% if((path !== "/records" || originalUrl.startsWith("/records?owner="))) { %>
+            <button class="btn btn-sm"><a href="/records">All Records</a></button>
+            <% } %>
+            <button class="btn btn-sm"><a href="/records/new">New record</a></button>
+
+            <% } %>
+
+            <% } %>
+        </nav>
+
+        <% if(activeUser && (path === "/records" || originalUrl.startsWith("/records?owner=0"))) { %>
+        <nav class="col-2 container">
+            <form action="/records">
+                <input class="btn btn-lg" type="text" name="owner" placeholder="search by name">
+            </form>
+        </nav>
+        <% } %>
+
+        <nav class="col-2 row flex-end">
+            <% if(!activeUser) { %>
+
+            <% if(path !== "/user/register") { %>
+            <button class="btn btn-sm"><a href="/user/register">Register</a></button>
+            <% } %>
+            <% if(path !== "/user/login") { %>
+            <button class="btn btn-sm"><a href="/user/login">Login</a></button>
+            <% } %>
+
+            <% } else { %>
+            <button class="btn btn-sm"><a href="/user/logout">Logout</a></button>
+
+            <% } %>
+        </nav>
+    </div>
+</header>

@@ -1,0 +1,95 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container">
+    <h1><%= orchard.owner.toUpperCase() %></h1>
+
+    <div class="m-5">
+        <div class="row">
+            <%- include("./partials/showPersonalInfo") %>
+        </div>
+        <div class="col container">
+            <span>
+                <i><b>Nugs</b></i>
+            </span>
+            <% for (let index = 0; index<orchard.lot.length; index++) { %>
+            <span class="row box flex-start">
+                <div class="col col-2 justify-center align-center">
+                    <b><%= orchard.lot[index].marka.toUpperCase() %>: </b>
+                </div>
+
+                <div class="row container flex-start">
+                    <table class="text-center" width="100%" height="50px">
+                        <thead>
+                            <tr>
+                                <% if(orchard.lot[index].variety) { %>
+                                <th>variety</th>
+                                <% } %>
+
+                                <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                <th><b><%= boxType %></b></th>
+                                <% } %>
+                                <% }) %>
+
+                                <% if(orchard.lot[index].totalPayable) { %>
+                                <th>Bill Amount</th>
+                                <% } %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <% if(orchard.lot[index].variety) { %>
+                                <td width="10%"><%= orchard.lot[index].variety %></td>
+                                <% } %>
+
+                                <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                <td width="10%"><%= orchard.lot[index].nugsInfo[boxType] %></td>
+                                <% } %>
+                                <% }) %>
+
+                                <% if(orchard.lot[index].totalPayable) { %>
+                                <td width="10%"><%= orchard.lot[index].totalPayable %> /-</td>
+                                <% } %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col justify-center">
+                    <button class="btn btn-sm btn-yellow">
+                        <a href="/records/<%= orchard._id %>/nugs/<%= index %>/generateInvoice">
+                            Generate Bill
+                        </a>
+                    </button>
+                </div>
+                <% if(orchard.lot[index].totalPayable) { %>
+                <div class="col justify-center">
+                    <% if(!orchard.lot[index].isSettled) { %>
+                    <button class="btn btn-sm btn-green">
+                        <a href="/records/<%= orchard._id %>/nugs/<%= index %>/toggleBillStatus">
+                            Settle bill
+                        </a>
+                    </button>
+                    <% } else { %>
+                    <button class="btn btn-sm btn-red">
+                        <a href="/records/<%= orchard._id %>/nugs/<%= index %>/toggleBillStatus">
+                            Unsettle bill
+                        </a>
+                    </button>
+                    <% } %>
+                </div>
+                <% } %>
+            </span>
+            <% } %>
+        </div>
+        <hr>
+        <div class="row m-0">
+            <button class="btn btn-lg btn-green">
+                <a href="/records/<%= orchard._id %>/edit">Edit Record</a>
+            </button>
+            <form action="/records/<%= orchard._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-lg btn-red">Delete Record</button>
+            </form>
+        </div>
+    </div>
+</div>

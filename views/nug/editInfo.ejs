@@ -1,0 +1,96 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container">
+    <h1><%= orchard.owner.toUpperCase() %></h1>
+
+    <div class="col">
+        <form action="/records/<%= orchard._id %>/nugs/personInfo?_method=PUT" method="POST">
+            <div class="row m-0">
+                <div>
+                    <div class="mb-5">
+                        <label for="owner"><b>Owner:</b></label>
+                        <input type="text" id="owner" name="owner" value="<%= orchard.owner %>" placeholder="full name">
+                    </div>
+                    <div class="mb-5">
+                        <label for="age"><b>Age:</b></label>
+                        <input type="number" id="age" name="age" min="5" max="120" value="<%= orchard.age %>"
+                            placeholder="age">
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="contact"><b>Contact:</b></label>
+                        <input type="number" id="contact" name="contact" value="<%= orchard.contact %>"
+                            placeholder="10 digit phone no." required>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="address"><b>Address:</b></label>
+                        <input type="text" id="address" name="address" value="<%= orchard.address %>"
+                            placeholder="permanent address">
+                    </div>
+
+                </div>
+                <div class="col justify-center">
+                    <div class="row flex-end">
+                        <button class="btn btn-sm btn-green">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="container">
+            <span>
+                <i><b>Nugs</b></i>
+            </span>
+
+            <% for (let index = 0; index<orchard.lot.length; index++) { %>
+            <span class="row box">
+                <div class="row">
+                    <span class="row">
+                        <div class="col col-2 justify-center">
+                            <b><%= orchard.lot[index].marka.toUpperCase() %>: </b>
+                        </div>
+                        <div class="row container flex-start">
+                            <table class="text-center" border="2px" width="200px" height="50px">
+                                <thead>
+                                    <tr>
+                                        <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                        <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                        <th><b><%= boxType %></b></th>
+                                        <% } %>
+                                        <% }) %>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <% Object.keys(orchard.lot[index].nugsInfo).forEach((boxType)=> { %>
+                                        <% if(orchard.lot[index].nugsInfo[boxType]) { %>
+                                        <td><%= orchard.lot[index].nugsInfo[boxType] %></td>
+                                        <% } %>
+                                        <% }) %>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </span>
+                    <span class="col-2 row flex-end container">
+                        <form action="/records/<%= orchard._id %>/nugs/<%= index %>">
+                            <button class="btn btn-sm btn-green">Edit Nug</button>
+                        </form>
+                        <form action="/records/<%= orchard._id %>/nugs/<%= index %>?_method=DELETE" method="POST">
+                            <button class="btn btn-sm btn-red">Remove</button>
+                        </form>
+                    </span>
+                </div>
+            </span>
+            <% } %>
+        </div>
+        <hr>
+        <div class="row">
+            <button class="btn btn-lg btn-yellow"><a href="/records/<%= orchard._id %>/nugs/new">Add Nug</a></button>
+            <form action="/records/<%= orchard._id %>?_method=DELETE" method="POST">
+                <button class="btn btn-lg btn-red">Delete Record</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/eventChangeOwner.js"></script>
