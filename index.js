@@ -84,7 +84,7 @@ app.use((req, res, next) => {
     next();
 })
 
-app.get("/apple-trade", (req, res, next) => {
+app.get("/", (req, res, next) => {
     res.redirect("/user/login");
 })
 app.use("/user", userRouter);
