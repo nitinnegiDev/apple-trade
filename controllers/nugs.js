@@ -135,8 +135,8 @@ module.exports.generateInvoice = async (req, res, next) => {
 module.exports.saveInvoice = async (req, res, next) => {
     const { id, index } = req.params;
     let { totalPayable } = req.body;
-    if (!totalPayable) {
-        req.flash("error", "bill amount is not calculated");
+    if (!totalPayable || totalPayable < 0) {
+        req.flash("error", "bill amount is not valid");
         return res.redirect("back");
     }
     totalPayable = parseInt(totalPayable);
