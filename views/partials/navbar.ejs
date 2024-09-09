@@ -2,7 +2,7 @@
     <div class="row align-center">
         <nav class="col-2">
             <b class="brandname">Apple-Trade</b>
-            <% if(activeUser) { %>
+            <% if(activeUser && path !== "/user/login" && path !== "/user/register") { %>
 
             <% if(path !== "/user/profile") { %>
             <button class="btn btn-sm"><a href="/user/profile">Profile</a></button>
@@ -29,7 +29,7 @@
         <% } %>
 
         <nav class="col-2 row flex-end">
-            <% if(!activeUser) { %>
+            <% if(path === "/user/register" || path === "/user/login") { %>
 
             <% if(path !== "/user/register") { %>
             <button class="btn btn-sm"><a href="/user/register">Register</a></button>
