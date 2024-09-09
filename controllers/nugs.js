@@ -146,9 +146,15 @@ module.exports.saveInvoice = async (req, res, next) => {
 
     const aadti = await Users.findById(req.user._id);
     if (lot.totalPayable) {
-        aadti.pendingPayment += totalPayable - lot.totalPayable;
+        if (!lot.isSettled) {
+            aadti.pendingPayment += totalPayable - lot.totalPayable;
+        } else {
+            aadti.pendingPayment += totalPayable;
+            lot.isSettled = false;
+            aadti.billsSettled -= 1;
+        }
     } else {
-        if (!aadti.pendingPayment) {
+        if (!aadti.pendingPayment && aadti.pendingPayment !== 0) {
             aadti.pendingPayment = 0;
             aadti.billsGenerated = 0;
         }
