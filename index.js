@@ -51,7 +51,6 @@ const userRouter = require("./routes/user")
 
 const Users = require("./models/users");
 const { expressError } = require("./utils/javascripts/expressError");
-const e = require("connect-flash");
 const appPort = 3000;
 
 app.engine("ejs", ejsMate);
